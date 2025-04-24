@@ -6,6 +6,8 @@
 #define COLOR_BLACK 0x0
 #define COLOR_GREEN 0x2
 #define COLOR_PURPLE 0xf
+#define B 0x0000
+#define Y 0xffc0
 
 unsigned char g_320x200x256[] =
 {
@@ -27,10 +29,10 @@ unsigned char g_320x200x256[] =
 	0x41, 0x00, 0x0F, 0x00,	0x00
 };
 
-void draw_rectangle(int x, int y, int width, int height) {
+void draw_rectangle(int x, int y, int width, int height, unsigned short color) {
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
-			vga_plot_pixel(x+i, y+j, COLOR_GREEN);
+			vga_plot_pixel(x+i, y+j, color);
 		}
 	}
 }
@@ -56,6 +58,16 @@ void draw_happy_face(int x, int y) {
     Debug::printf("*** just drew a smiley face\n");
 }
 
+void draw_image(unsigned short* image, int x, int y, int width, int height, int scale) {
+    for (int cur_height = 0; cur_height < height; cur_height++) {
+        for (int cur_width = 0; cur_width < width; cur_width++) {
+            draw_rectangle(x+cur_width*scale, y+cur_height*scale, scale, scale, image[width*cur_height+cur_width]);
+        }
+    }
+
+    Debug::printf("*** drew the image\n");
+}
+
 void vga_clear_screen() {
     for (int i = 0; i < 320; i++) {
         for (int j = 0; j < 200; j++) {
@@ -65,6 +77,7 @@ void vga_clear_screen() {
 }
 
 void vga_plot_pixel(int x, int y, unsigned short color) {
+    // Debug::printf("%d", sizeof(unsigned short));
     unsigned short offset = x + 320 * y;
     unsigned char *VGA = (unsigned char*) VGA_ADDRESS;
     VGA[offset] = color;
@@ -127,12 +140,10 @@ void write_regs(unsigned char *regs)
 
 void vga_test() {
     write_regs(g_320x200x256);
-    sleep(2);
 
-    
     vga_clear_screen();
 	// draw rectangle
-	draw_rectangle(150, 10, 100, 50);
+	draw_rectangle(150, 10, 100, 50, COLOR_GREEN);
 	// draw some faces
 	draw_happy_face(10,10);
 	draw_happy_face(100,100);
@@ -146,6 +157,23 @@ void vga_test() {
 			vga_plot_pixel(i, 50+j, i);
 		}
 	}
+
+    unsigned short my_image[25] = {
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+    };
+    unsigned short my_image_two[25] = {
+        Y, Y, Y, Y, Y,
+        Y, Y, Y, Y, Y,
+        Y, Y, Y, Y, Y,
+        Y, Y, Y, Y, Y,
+        Y, Y, Y, Y, Y,
+    };
+    draw_image(my_image, 50, 50, 5, 5, 2);
+    draw_image(my_image_two, 50, 50, 5, 5, 1);
 
     while (true) {
     }
