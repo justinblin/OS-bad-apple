@@ -1,6 +1,7 @@
 #include "vga.h"
 #include "machine.h"
 #include "threads.h"
+#include "debug.h"
 
 #define COLOR_BLACK 0x0
 #define COLOR_GREEN 0x2
@@ -51,6 +52,8 @@ void draw_happy_face(int x, int y) {
 	vga_plot_pixel(x+8,	y+10,COLOR_PURPLE);
 	vga_plot_pixel(x+9,	y+9,COLOR_PURPLE);
 	vga_plot_pixel(x+10,y+8,COLOR_PURPLE);
+
+    Debug::printf("*** just drew a smiley face\n");
 }
 
 void vga_clear_screen() {
