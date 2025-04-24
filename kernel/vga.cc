@@ -1,5 +1,4 @@
 #include "vga.h"
-#include "pci.h"
 #include "machine.h"
 #include "threads.h"
 
@@ -26,28 +25,6 @@ unsigned char g_320x200x256[] =
 	0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
 	0x41, 0x00, 0x0F, 0x00,	0x00
 };
-
-void vga_test() {
-    write_regs(g_320x200x256);
-    sleep(2);
-
-    vga_clear_screen();
-	// draw rectangle
-	draw_rectangle(150, 10, 100, 50);
-	// draw some faces
-	draw_happy_face(10,10);
-	draw_happy_face(100,100);
-	draw_happy_face(300,150);
-	// bounds
-	vga_plot_pixel(0, 0, 15);
-	vga_plot_pixel(319, 199, COLOR_PURPLE);
-	// see some colors
-	for (int i = 0; i < 15; i++) {
-		for (int j = 0; j < 100; j++) {
-			vga_plot_pixel(i, 50+j, i);
-		}
-	}
-}
 
 void draw_rectangle(int x, int y, int width, int height) {
 	for (int i = 0; i < width; i++) {
@@ -144,3 +121,29 @@ void write_regs(unsigned char *regs)
 	outb(VGA_AC_INDEX, 0x20);
 }
 // End copied code
+
+void vga_test() {
+    write_regs(g_320x200x256);
+    sleep(2);
+
+    
+    vga_clear_screen();
+	// draw rectangle
+	draw_rectangle(150, 10, 100, 50);
+	// draw some faces
+	draw_happy_face(10,10);
+	draw_happy_face(100,100);
+	draw_happy_face(300,150);
+	// bounds
+	vga_plot_pixel(0, 0, 15);
+	vga_plot_pixel(319, 199, COLOR_PURPLE);
+	// see some colors
+	for (int i = 0; i < 15; i++) {
+		for (int j = 0; j < 100; j++) {
+			vga_plot_pixel(i, 50+j, i);
+		}
+	}
+
+    while (true) {
+    }
+}

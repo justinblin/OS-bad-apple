@@ -322,7 +322,7 @@ extern "C" int sysHandler(uint32_t eax, uint32_t *frame) {
         naive_unmap((void*)user_sp[1]);
         return 0;
     case 103:
-        Debug::printf("*** heya");
+        Debug::printf("*** about to run vga test");
         vga_test();
         return 0;
     case 418:
