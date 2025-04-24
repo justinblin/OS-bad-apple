@@ -12,6 +12,7 @@
 #include "libk.h"
 #include "elf.h"
 #include "promise.h"
+#include "vga.h"
 
 bool address_valid(uint32_t addr, uint32_t size) {
     return addr >= 0x80000000 && addr + size <= 0xFFFFFFFF;
@@ -271,6 +272,10 @@ void naive_unmap(void* p) {
     VMM::naive_munmap(p, true);
 }
 
+void vga_syscall() {
+    vga_test();
+}
+
 extern "C" int sysHandler(uint32_t eax, uint32_t *frame) {
     //Debug::printf("*** syscall #%d\n",eax);
     uint32_t *user_sp = (uint32_t*)frame[3];
@@ -315,6 +320,10 @@ extern "C" int sysHandler(uint32_t eax, uint32_t *frame) {
         return (uint32_t)naive_mmap(user_sp[1], user_sp[2], user_sp[3], user_sp[4]);
     case 102:
         naive_unmap((void*)user_sp[1]);
+        return 0;
+    case 103:
+        Debug::printf("*** heya");
+        vga_test();
         return 0;
     case 418:
         Debug::printf("*** I'm a teapot\n");
