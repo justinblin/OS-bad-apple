@@ -86,9 +86,11 @@ void draw_image(unsigned short* image, int x, int y, int width, int height, int 
 
 void draw_animation(unsigned short* image, int x, int y, int width, int height, int scale, int num_frames) {
 	for (int cur_frame = 0; cur_frame < num_frames; cur_frame++) {
+		vga_clear_screen();
 		draw_image(image + (cur_frame*width*height), x, y, width, height, scale);
-		
-		for (volatile int i = 0; i < 10000000; i++) {} // pause between each frame
+
+		volatile int i = 0;
+		for (int j = 0; j < 100000000; j++) {i+=1;} // pause between each frame
 	}
 }
 
@@ -149,22 +151,83 @@ void write_regs(unsigned char *regs)
 
 void vga_test() {
     write_regs(g_320x200x256);
+	vga_clear_screen();
 
 	// 320x200, scale 10 32x20
 	// 10fps
 
+	
+	// TODO
+
+	// get first 1 minute of bad apple
 	// convert bad apple into 10fps frames
 	// convert frames into ascii
 	// convert ascii into B or W
 
-    unsigned short my_image[25] = {
+	// clean up test case dir
+
+    unsigned short my_image[250] = {
         B, B, B, B, B,
         B, B, B, B, B,
         B, B, B, B, B,
         B, B, B, B, B,
         B, B, B, B, B,
+
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+
+		B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		
+		B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		
+		B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		
+		B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+        B, B, B, B, B,
+
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
+		W, W, W, W, W,
     };
-    draw_image(my_image, 50, 50, 5, 5, 2);
+    draw_animation(my_image, 50, 50, 5, 5, 5, 10);
 
     while (true) {
     }
