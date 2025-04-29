@@ -90,7 +90,7 @@ void draw_animation(unsigned short* image, int x, int y, int width, int height, 
 		draw_image(image + (cur_frame*width*height), x, y, width, height, scale);
 
 		volatile int i = 0;
-		for (int j = 0; j < 100000000; j++) {i+=1;} // pause between each frame
+		for (int j = 0; j < 200000000; j++) {i+=1;} // pause between each frame
 	}
 }
 
@@ -153,81 +153,203 @@ void vga_test() {
     write_regs(g_320x200x256);
 	vga_clear_screen();
 
-	// 320x200, scale 10 32x20
+	// 320x200, scale 20 16x10
 	// 10fps
 
-	
+
 	// TODO
 
 	// get first 1 minute of bad apple
 	// convert bad apple into 10fps frames
-	// convert frames into ascii
-	// convert ascii into B or W
+	// convert frames into ascii txt
+	// convert ascii txt into B or W array
 
 	// clean up test case dir
 
-    unsigned short my_image[250] = {
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
+    unsigned short frame_1[1200] = {
+        B,B,B,B,B,B,B,B,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,B,
 
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,B,
+		B,B,B,B,B,B,B,B,
+		B,B,B,B,B,B,B,B,
+		B,B,B,B,B,B,B,B,
 
-		B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
+		B,B,B,B,B,W,W,W,
+		B,B,B,B,B,W,W,W,
+		B,B,B,B,B,W,W,W,
+		B,B,B,B,B,B,W,W,
+		B,B,B,B,B,B,W,W,
 
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		
-		B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
+		B,B,B,B,B,W,W,W,
+		B,B,B,B,B,W,W,W,
+		B,B,B,B,B,B,W,W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,W,
 
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		
-		B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
+		B,B,B,B,B,B,W,W,
+		B,B,B,B,B,B,W,W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,B,
 
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		
-		B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
-        B, B, B, B, B,
+		W,B,B,B,B,B,W,W,
+		B,B,B,B,B,B,W,W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,B,
 
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
-		W, W, W, W, W,
+		W,B,B,B,B,B,W,W,
+		W,B,B,B,B,B,W,W,
+		W,B,B,B,B,B,B,W,
+		W,B,B,B,B,B,B,W,
+		B,B,B,B,B,B,B,B,
+
+		W,W,B,B,B,B,B,W,
+		W,W,B,B,B,B,W,W,
+		W,W,B,B,B,B,B,W,
+		W,B,B,B,B,B,B,W,
+		W,B,B,B,B,B,B,B,
+
+		W,W,B,B,B,B,B,W,
+		W,W,W,B,B,B,B,W,
+		W,W,B,B,B,B,B,W,
+		W,W,B,B,B,B,B,B,
+		W,B,B,B,B,B,B,B,
+
+		W,W,W,B,B,B,B,W,
+		W,W,W,B,B,B,B,W,
+		W,W,W,B,B,B,B,W,
+		W,W,B,B,B,B,B,B,
+		W,W,B,B,B,B,B,B,
+
+		W,W,W,B,B,B,B,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,B,W,
+		W,W,W,B,B,B,B,B,
+		W,W,B,B,B,B,B,B,
+
+		W,W,W,B,B,B,B,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,B,W,
+		W,W,W,B,B,B,B,W,
+		W,W,B,B,B,B,B,W,
+
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,B,B,B,B,B,W,
+		W,W,B,B,B,B,B,W,
+
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,B,B,B,B,W,W,
+		W,W,B,B,B,B,B,W,
+
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,B,B,B,B,W,W,
+		W,W,B,B,B,B,W,W,
+		W,W,B,B,B,B,W,W,
+
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,B,W,W,
+		W,B,B,B,B,B,W,W,
+
+		W,W,B,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,B,W,W,
+		W,B,B,B,B,B,W,W,
+
+		W,W,B,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,B,B,B,B,B,W,W,
+
+		W,W,B,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,B,B,B,B,W,W,W,
+
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,W,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,B,B,B,B,W,W,W,
+
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,W,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,W,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,B,B,B,W,W,W,
+		W,W,B,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,B,B,B,B,W,W,
+		W,W,B,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,W,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,W,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
+
+		W,W,W,B,B,W,W,W,
+		W,W,W,W,B,W,W,W,
+		W,W,W,B,B,W,W,W,
+		W,W,W,B,B,B,W,W,
+		W,W,W,B,B,B,W,W,
     };
-    draw_animation(my_image, 50, 50, 5, 5, 5, 10);
+
+    draw_animation(frame_1, 0, 0, 8, 5, 40, 30);
+	
 
     while (true) {
     }

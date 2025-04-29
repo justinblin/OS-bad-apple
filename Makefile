@@ -28,7 +28,7 @@ QEMU_ACCEL ?= tcg,thread=multi
 QEMU_CPU ?= max
 QEMU_SMP ?= 4
 QEMU_MEM ?= 128m
-QEMU_TIMEOUT ?= 120
+QEMU_TIMEOUT ?= 300
 QEMU_TIMEOUT_CMD ?= timeout
 QEMU_DEBUG ?=  # e.g -d guest_errors
 
